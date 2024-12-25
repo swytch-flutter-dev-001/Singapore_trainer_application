@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   @override
@@ -62,8 +63,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
         backgroundColor: darkGreen,
-        title: Text('Forgot Password', style: TextStyle(color: Colors.white)),
+        title: Text('Forgot Password', style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500)),
         elevation: 0,
       ),
       body: Padding(
@@ -107,7 +112,10 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
             // Forgot password button
             _isLoading
-                ? CircularProgressIndicator(color: lightGreen)
+                ?SpinKitFadingCube(
+              color: Color(0xFF659F62),
+              size: 20,
+            )
                 : ElevatedButton(
               onPressed: _handleForgotPassword,
               style: ElevatedButton.styleFrom(

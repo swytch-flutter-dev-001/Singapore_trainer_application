@@ -50,7 +50,7 @@ class _ChatingLearnerState extends State<ChatingLearner> {
         actions: [
           // Optionally, you could add a profile icon or other features here
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(right: 22),
             child: CircleAvatar(
               backgroundColor: Colors.white,
               child: IconButton(

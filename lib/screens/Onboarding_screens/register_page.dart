@@ -36,8 +36,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
             begin: Alignment.topCenter,
             colors: [
               Color(0xFF659F62), // Dark Green
-              Color(0xFF92C287), // Medium Green
-              Color(0xFFCDEAC0), // Light Green
+              Color(0xFF659F62), // Medium Green
+              Color(0xFF659F62), // Light Green
             ],
           ),
         ),

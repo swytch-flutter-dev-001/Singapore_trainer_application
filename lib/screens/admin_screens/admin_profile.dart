@@ -25,11 +25,15 @@ class _AdminProfileEditPageState extends State<AdminProfileEditPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
         leading: IconButton(onPressed: (){
           Navigator.pop(context);
-        }, icon:Icon(Icons.arrow_back)),
-        centerTitle: true,
-        title:  Text("Admin Profile",style: TextStyle(color: Colors.white),),
+        }, icon:Icon(Icons.arrow_back,color: Colors.white,)),
+
+        title:  Text("ADMIN PROFILE",style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w500),),
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
         backgroundColor:Color(0xFF659F62),
         elevation: 0,
       ),

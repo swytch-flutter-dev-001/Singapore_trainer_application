@@ -8,16 +8,19 @@ class ClassDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Use MediaQuery to get screen size information
+    double screenWidth = MediaQuery.of(context).size.width;
+    bool isLargeScreen = screenWidth > 600;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: isLargeScreen ? 100 : 80,
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
-
         title: Text(
-          (classDetails['title']??'CLASS').toUpperCase(),
+          (classDetails['title'] ?? 'CLASS').toUpperCase(),
           style: const TextStyle(
             fontWeight: FontWeight.w500,
             fontSize: 18,
@@ -25,13 +28,13 @@ class ClassDetailsPage extends StatelessWidget {
           ),
         ),
         backgroundColor: const Color(0xFF659F62),
-
         elevation: 3,
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Card(
+            color: Color(0xFFF0F8F5),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16.0),
             ),
@@ -46,8 +49,8 @@ class ClassDetailsPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12.0),
                       child: Image.asset(
                         classDetails['icon'],
-                        width: 120,
-                        height: 120,
+                        width: screenWidth * 0.3, // Dynamic image size
+                        height: screenWidth * 0.3, // Dynamic image size
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -56,10 +59,10 @@ class ClassDetailsPage extends StatelessWidget {
                   Center(
                     child: Text(
                       classDetails['title'],
-                      style: const TextStyle(
-                        fontSize: 26,
+                      style: TextStyle(
+                        fontSize: isLargeScreen ? 30 : 26,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF659F62),
+                        color: const Color(0xFF659F62),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -86,7 +89,7 @@ class ClassDetailsPage extends StatelessWidget {
                       minRating: 1,
                       direction: Axis.horizontal,
                       itemCount: 5,
-                      itemSize: 30,
+                      itemSize: isLargeScreen ? 40 : 30, // Adjust size based on screen width
                       itemBuilder: (context, _) => const Icon(Icons.star, color: Colors.amber),
                       onRatingUpdate: (rating) {
                         // Handle rating update if needed
@@ -100,7 +103,7 @@ class ClassDetailsPage extends StatelessWidget {
                         // Handle purchase action
                         _showPurchaseConfirmation(context);
                       },
-                      icon: const Icon(Icons.shopping_cart,color: Colors.white,),
+                      icon: const Icon(Icons.shopping_cart, color: Colors.white),
                       label: const Text("Purchase Pack"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF659F62),

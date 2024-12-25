@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:singapore_trainer_app/Trainer_screens/trainer_home.dart';
 import 'package:singapore_trainer_app/screens/admin_screens/admin_home.dart';
+import '../screens/Onboarding_screens/login_page.dart';
 import 'Learner_calenders.dart';
 import 'Learner_class_details.dart';
 import 'Learner_profile.dart';
@@ -128,30 +129,58 @@ class _Learner_homeState extends State<Learner_home> {
                 );
               },
             ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: Text("Trainer", style: TextStyle(fontSize: 16.sp)),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const Trainer_home(),
-                  ),
-                );
-              },
+            SizedBox(
+              height: 360,
             ),
             ListTile(
-              leading: const Icon(Icons.settings),
-              title: Text("Admin", style: TextStyle(fontSize: 16.sp)),
+              leading: const Icon(Icons.logout),
+              title: const Text("Logout"),
               onTap: () {
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const AdminHome(),
-                  ),
+                  MaterialPageRoute(builder: (context) => LoginPage()), // Replace with your login page widget
                 );
+
               },
             ),
+            // SizedBox(
+            //   height: 200,
+            //   child: ListTile(
+            //     leading: const Icon(Icons.logout),
+            //     title: const Text("Logout"),
+            //     onTap: () {
+            //       Navigator.pushReplacement(
+            //         context,
+            //         MaterialPageRoute(builder: (context) => LoginPage()), // Replace with your login page widget
+            //       );
+            //
+            //     },
+            //   ),
+            // ),
+            // ListTile(
+            //   leading: const Icon(Icons.settings),
+            //   title: Text("Trainer", style: TextStyle(fontSize: 16.sp)),
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const Trainer_home(),
+            //       ),
+            //     );
+            //   },
+            // ),
+            // ListTile(
+            //   leading: const Icon(Icons.settings),
+            //   title: Text("Admin", style: TextStyle(fontSize: 16.sp)),
+            //   onTap: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const AdminHome(),
+            //       ),
+            //     );
+            //   },
+            // ),
           ],
         ),
       ),

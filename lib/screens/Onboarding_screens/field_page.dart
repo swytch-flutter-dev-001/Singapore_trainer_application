@@ -19,8 +19,8 @@ class FieldPage extends StatelessWidget {
             begin: Alignment.topCenter,
             colors: [
               const Color(0xFF659F62), // Dark Green
-              const Color(0xFF92C287), // Medium Green
-              const Color(0xFFCDEAC0), // Light Green
+              const Color(0xFF659F62), // Medium Green
+              const Color(0xFF659F62), // Light Green
             ],
           ),
         ),

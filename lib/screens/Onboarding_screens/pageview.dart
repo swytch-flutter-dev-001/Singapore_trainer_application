@@ -19,6 +19,8 @@ class _SportsPageViewState extends State<SportsPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
           // PageView builder with transform transition
@@ -44,67 +46,111 @@ class _SportsPageViewState extends State<SportsPageView> {
                     transform: Matrix4.identity()
                       ..rotateY(pageOffset * 0.2)
                       ..scale(1 - (pageOffset.abs() * 0.1)),
-                    child: _buildPage(sportsData[index]['image']!, sportsData[index]['caption']!),
+                    child: _buildPage(
+                      sportsData[index]['image']!,
+                      sportsData[index]['caption']!,
+                    ),
                   );
                 },
               );
             },
           ),
-          // Show buttons
-          if (_currentPage != sportsData.length - 1) // Continue button for all pages except last
-            Positioned(
-              bottom: 20,
-              left: 200,
-              child: SizedBox(
-                height: 40,
-                width: 140,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Navigate to the next page
-                    _pageController.nextPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.ease,
-                    );
-                  },
-                  icon: const Icon(Icons.arrow_forward, color: Colors.white),
-                  label: const Text(
-                    'Next',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: const Color(0xFF659F62), // Dark Green
-                    foregroundColor: Colors.white,
-                  ),
-                ),
+
+          // Dots Indicator
+          Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.2,
+            left: MediaQuery.of(context).size.width * 0.44,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                sportsData.length,
+                    (index) => buildDot(index: index),
               ),
             ),
-          // Show "Get Started" button only on the last page
+          ),
+
+          // Navigation buttons
+          // Navigation buttons
+          // Navigation buttons
+          if (_currentPage != sportsData.length - 1)
+            Positioned(
+              bottom: 40,
+              left: 20,
+              right: 20,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_currentPage > 0) {
+                        _pageController.previousPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.ease,
+                        );
+                      }
+                    },
+                    child: Text(
+                      "Previous",
+                      style: TextStyle(fontSize: 18, color: Color(0xFF659F62)),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFCDEAC0), // Light Green
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      _pageController.nextPage(
+                        duration: Duration(milliseconds: 300),
+                        curve: Curves.ease,
+                      );
+                    },
+                    child: Text(
+                      "Next",
+                      style: TextStyle(fontSize: 18),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF659F62),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+          // "Get Started" button on the last page
           if (_currentPage == sportsData.length - 1)
             Positioned(
               bottom: 40,
-              right: 20,
-              child: SizedBox(
-                height: 40,
-                width: 325,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Navigate to the login page
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                  icon: const Icon(Icons.arrow_forward, color: Colors.white),
-                  label: const Text('Get Started'),
-                  style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
+              left: 20,
+
+
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 300,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                    child: Text(
+                      "Get Started",
+                      style: TextStyle(fontSize: 18, color: Color(0xFF659F62)),
                     ),
-                    backgroundColor: const Color(0xFF659F62), // Dark Green
-                    foregroundColor: Colors.white,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFCDEAC0), // Light Green
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -131,11 +177,23 @@ class _SportsPageViewState extends State<SportsPageView> {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            fontFamily: 'YourCustomFont',
-            color: Color(0xFF659F62),
+            color: Color(0xFF659F62), // Dark Green
           ),
         ),
       ],
+    );
+  }
+
+  AnimatedContainer buildDot({required int index}) {
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      margin: EdgeInsets.only(right: 5),
+      height: 6,
+      width: _currentPage == index ? 20 : 6,
+      decoration: BoxDecoration(
+        color: _currentPage == index ? Color(0xFF659F62) : Color(0xFFD8D8D8),
+        borderRadius: BorderRadius.circular(3),
+      ),
     );
   }
 }

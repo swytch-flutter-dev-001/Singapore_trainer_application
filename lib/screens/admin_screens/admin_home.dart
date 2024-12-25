@@ -9,9 +9,11 @@ import '../../Trainer_screens/Notification_trainer.dart';
 import '../../utils/TrainerInsightPage.dart';
 import '../../utils/action_page.dart';
 import '../../utils/reports_page.dart';
+import '../Onboarding_screens/login_page.dart';
 import 'Master_data_admin.dart';
 import 'admin_add_notifications.dart';
 import 'admin_chat.dart';
+import 'admin_profile.dart';
 import 'admin_tabs.dart';
 
 class AdminHome extends StatefulWidget {
@@ -71,11 +73,34 @@ class _AdminHomeState extends State<AdminHome> {
         child: ListView(
           children: [
              SizedBox(height: 20.h),
-             DrawerHeader(
-              decoration: BoxDecoration(color: Color(0xFF659F62)),
-              child: Text(
-                "ADMIN MENU",
-                style: TextStyle(color: Colors.white, fontSize: 18.sp),
+            DrawerHeader(
+              decoration: const BoxDecoration(color: Color(0xFF659F62)),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AdminProfileEditPage(),
+                        ),
+                      );
+                    },
+                    child: const CircleAvatar(
+                      radius: 40, // No ScreenUtil needed for this specific case
+                      backgroundImage: AssetImage('assets/profile.jpg'),
+                    ),
+                  ),
+                  SizedBox(height: 10.h), // Use ScreenUtil for height
+                  Text(
+                    "ADMIN MENU",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.sp, // Use ScreenUtil for font size
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
             ListTile(
@@ -149,6 +174,10 @@ class _AdminHomeState extends State<AdminHome> {
               leading: const Icon(Icons.logout),
               title: const Text("Logout"),
               onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()), // Replace with your login page widget
+                );
 
               },
             ),

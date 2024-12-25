@@ -15,7 +15,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         toolbarHeight: 80,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -48,6 +48,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
 
   Widget _buildClassInfo() {
     return Card(
+      color: Color(0xFFF0F8F5),
       elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
@@ -106,6 +107,7 @@ class _ClassDetailPageState extends State<ClassDetailPage> {
 
   Widget _buildTrainerInfo() {
     return Card(
+      color: Color(0xFFF0F8F5),
       elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
