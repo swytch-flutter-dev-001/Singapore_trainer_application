@@ -60,12 +60,14 @@ class _AdminActionsPageState extends State<AdminActionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      
       appBar: AppBar(
         toolbarHeight: 80,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'ADMIN ACTIONS',
-          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, color: Colors.white),
+          style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: Colors.white),
         ),
         backgroundColor: Color(0xFF659F62),
       ),
@@ -75,8 +77,10 @@ class _AdminActionsPageState extends State<AdminActionsPage> {
             padding: const EdgeInsets.all(16.0),
             child: Center(
               child: Card(
+
+                color: Color(0xFFF0F8F5),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                elevation: 6,
+                elevation: 3,
                 shadowColor: Colors.grey.shade300,
                 child: Padding(
                   padding: const EdgeInsets.all(24.0),

@@ -44,7 +44,7 @@ class _LernerCalendarPageState extends State<LernerCalendarPage> {
         .toList();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF0F8F5),
       appBar: AppBar(
         backgroundColor: const Color(0xFF659F62), // Dark Green for branding
         title: Text(
@@ -59,10 +59,10 @@ class _LernerCalendarPageState extends State<LernerCalendarPage> {
           SizedBox(height: 20.h),
           // Header with a modern, clean style
           Padding(
-            padding: const EdgeInsets.only(right: 136),
+            padding: const EdgeInsets.only(right: 190),
             child: Text(
               "Manage Your Classes",
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500, color: Colors.black),
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.black),
             ),
           ),
           SizedBox(height: 10.h),

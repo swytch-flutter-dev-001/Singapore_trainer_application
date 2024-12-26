@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:singapore_trainer_app/Trainer_screens/edit_trainer_profile.dart';
 
 class TrainerProfile extends StatefulWidget {
@@ -22,7 +23,7 @@ class _TrainerProfileState extends State<TrainerProfile> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 70.h,
         backgroundColor: primaryColor,
         elevation: 0,
         leading: IconButton(

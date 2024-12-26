@@ -28,7 +28,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       }else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Invalid credentials. Please try again.'),
+            content: Text('Incorrect username or password'),
           ),
         );
       }
@@ -65,7 +65,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: 40.h),
+                    SizedBox(height: 80.h),
                 // Image Section
                 Padding(
                   padding: const EdgeInsets.all(20),
@@ -169,7 +169,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                             ),
                           ),
                           SizedBox(
-                            height: 90.h,
+                            height: 100.h,
                           )
 
                           // Form Section

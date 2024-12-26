@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class notification_Trainer extends StatefulWidget {
   const notification_Trainer({super.key});
@@ -40,7 +41,7 @@ class _notification_TrainerState extends State<notification_Trainer> {
           style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w500),
         ),
 
-        toolbarHeight: 80, // Set the AppBar height
+        toolbarHeight: 70.h, // Set the AppBar height
         iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: ListView.separated(

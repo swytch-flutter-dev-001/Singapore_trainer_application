@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ClassDetailsPage extends StatelessWidget {
   final Map<String, dynamic> classDetails;
@@ -15,7 +16,7 @@ class ClassDetailsPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF4F4F4),
       appBar: AppBar(
-        toolbarHeight: isLargeScreen ? 100 : 80,
+       toolbarHeight: 70.h,
         iconTheme: IconThemeData(
           color: Colors.white,
         ),

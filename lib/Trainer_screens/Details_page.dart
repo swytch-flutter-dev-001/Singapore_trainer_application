@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';  // Import for responsiveness
 import 'class_detail_page.dart';
 
 class DETAILS extends StatefulWidget {
@@ -19,7 +19,7 @@ class _DETAILSState extends State<DETAILS> {
       "time": "10:00 AM - 11:00 AM",
       "realPrice": 400,
       "offerPrice": 300,
-      "icon": "assets/images/Singapore Trainers-2.png",
+      "icon": "assets/images/Singapore Trainers-2.png", // You can remove this field if you're no longer using it
     },
     {
       "title": "Advanced Yoga",
@@ -113,7 +113,6 @@ class _DETAILSState extends State<DETAILS> {
                       ),
                     );
                   },
-
                   child: Card(
                     color: const Color(0xFFF0F8F5),
                     margin: const EdgeInsets.symmetric(vertical: 8),
@@ -122,11 +121,11 @@ class _DETAILSState extends State<DETAILS> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset(
-                            classItem["icon"],
-                            width: 60,
-                            height: 60,
-                            fit: BoxFit.cover,
+                          // CircleAvatar instead of image
+                          CircleAvatar(
+                            backgroundImage: AssetImage("assets/images/Singapore Trainers-2.png"),
+                            radius: 30.r, // Responsive radius
+                            
                           ),
                           const SizedBox(width: 10),
                           Expanded(
@@ -135,8 +134,8 @@ class _DETAILSState extends State<DETAILS> {
                               children: [
                                 Text(
                                   classItem["title"],
-                                  style: const TextStyle(
-                                      fontSize: 16, fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      fontSize: 16.sp, fontWeight: FontWeight.bold),
                                   softWrap: true,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -148,9 +147,11 @@ class _DETAILSState extends State<DETAILS> {
                                   minRating: 1,
                                   direction: Axis.horizontal,
                                   itemCount: 5,
-                                  itemSize: 20,
-                                  itemBuilder: (context, _) =>
-                                  const Icon(Icons.star, color: Colors.amber),
+                                  itemSize: 20.sp, // Responsive item size
+                                  itemBuilder: (context, _) => const Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
                                   onRatingUpdate: (rating) {},
                                 ),
                               ],
@@ -159,14 +160,18 @@ class _DETAILSState extends State<DETAILS> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Text("\$${classItem["offerPrice"]}",
-                                  style: const TextStyle(
-                                      color: Colors.green,
-                                      fontWeight: FontWeight.bold)),
-                              Text("\$${classItem["realPrice"]}",
-                                  style: const TextStyle(
-                                      color: Colors.red,
-                                      decoration: TextDecoration.lineThrough)),
+                              Text(
+                                "\$${classItem["offerPrice"]}",
+                                style: const TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "\$${classItem["realPrice"]}",
+                                style: const TextStyle(
+                                    color: Colors.red,
+                                    decoration: TextDecoration.lineThrough),
+                              ),
                               IconButton(
                                 icon: const Icon(Icons.edit, color: Colors.blue),
                                 onPressed: () => _showEditDialog(index),
@@ -197,7 +202,6 @@ class _DETAILSState extends State<DETAILS> {
       context: context,
       builder: (context) {
         return AlertDialog(
-
           title: const Text("Add Class"),
           content: SingleChildScrollView(
             child: Column(
@@ -220,11 +224,11 @@ class _DETAILSState extends State<DETAILS> {
               width: 90,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)
-                  ),
-                  backgroundColor: Color(0xFF659F62),
-                  foregroundColor: Colors.white
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)
+                    ),
+                    backgroundColor: Color(0xFF659F62),
+                    foregroundColor: Colors.white
                 ),
                 onPressed: () {
                   setState(() {
@@ -233,7 +237,7 @@ class _DETAILSState extends State<DETAILS> {
                       "time": timeController.text,
                       "realPrice": int.parse(realPriceController.text),
                       "offerPrice": int.parse(offerPriceController.text),
-                      "icon": "assets/images/Singapore Trainers-2.png",
+                      "icon": "assets/images/Singapore Trainers-2.png", // Can be removed if not needed
                     });
                   });
                   Navigator.pop(context);
@@ -274,21 +278,21 @@ class _DETAILSState extends State<DETAILS> {
           actions: [
             TextButton(
               style: TextButton.styleFrom(
-                foregroundColor: Colors.black
+                  foregroundColor: Colors.black
               ),
               onPressed: () => Navigator.pop(context),
               child: const Text("Cancel",style: TextStyle(fontWeight: FontWeight.w500),),
             ),
             SizedBox(
-        height: 40,
+              height: 40,
               width: 90,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5)
-                  ),
-                  foregroundColor: Colors.white,
-                  backgroundColor: Color(0xFF659F62)
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5)
+                    ),
+                    foregroundColor: Colors.white,
+                    backgroundColor: Color(0xFF659F62)
                 ),
                 onPressed: () {
                   setState(() {

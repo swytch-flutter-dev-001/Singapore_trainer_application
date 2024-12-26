@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:singapore_trainer_app/screens/Onboarding_screens/login_page.dart';
 
 class SportsPageView extends StatefulWidget {
@@ -127,13 +128,13 @@ class _SportsPageViewState extends State<SportsPageView> {
           if (_currentPage == sportsData.length - 1)
             Positioned(
               bottom: 40,
-              left: 20,
+              left: 15,
 
 
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: SizedBox(
-                  width: 300,
+                  width: 320.w,
                   child: ElevatedButton(
                     onPressed: () {
                       Navigator.push(

@@ -68,7 +68,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           color: Colors.white
         ),
         backgroundColor: darkGreen,
-        title: Text('Forgot Password', style: TextStyle(color: Colors.white,fontWeight: FontWeight.w500)),
+        title: Text('FORGET PASSWORD', style: TextStyle(color: Colors.white,fontSize:18,fontWeight: FontWeight.w500)),
         elevation: 0,
       ),
       body: Padding(

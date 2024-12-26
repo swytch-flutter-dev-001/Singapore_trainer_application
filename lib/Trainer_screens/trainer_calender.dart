@@ -30,7 +30,7 @@ class _CalendarPageState extends State<CalendarPage> {
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF659F62),
-        toolbarHeight: 80.h,
+        toolbarHeight: 70.h,
         title: Text(
           "CALENDAR",
           style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20.sp, color: Colors.white),

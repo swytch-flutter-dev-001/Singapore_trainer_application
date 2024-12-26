@@ -267,28 +267,43 @@ class _AdminChatState extends State<AdminChat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFF0F8F5),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         toolbarHeight: 80.h,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF659F62),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        
+        title: Row(
           children: [
-            Text(
-              "CHANNEL CHAT",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.w500,
-              ),
+            CircleAvatar(
+              backgroundImage: const AssetImage("assets/images/Singapore Trainers-2.png"),
+              radius: 30.r,
             ),
-            Text(
-              "$onlineCount Members Online",
-              style: TextStyle(
-                fontSize: 12.sp,
-                color: Colors.white70,
-              ),
+            SizedBox(
+              width: 10.h,
+            ),
+            
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+               
+                Text(
+                  "CHANNEL CHAT",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Text(
+                  "$onlineCount Members Online",
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    color: Colors.white70,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -311,7 +326,7 @@ class _AdminChatState extends State<AdminChat> {
                       margin: EdgeInsets.symmetric(vertical: 5.h),
                       padding: EdgeInsets.all(12.w),
                       decoration: BoxDecoration(
-                        color: isAdmin ? Color(0xFFF0F8F5) : Colors.grey[300],
+                        color: isAdmin ? Color(0xFF92C287) : Colors.grey[300],
                         borderRadius: BorderRadius.circular(15.r),
                       ),
                       child: Column(

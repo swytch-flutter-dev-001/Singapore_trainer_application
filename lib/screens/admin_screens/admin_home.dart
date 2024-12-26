@@ -43,7 +43,7 @@ class _AdminHomeState extends State<AdminHome> {
           color: Colors.white,
         ),
         backgroundColor: const Color(0xFF659F62),
-        toolbarHeight: 80.h,
+        toolbarHeight: 70.h,
         title: const Text(
           "ADMIN HOME",
           style: TextStyle(
@@ -168,7 +168,7 @@ class _AdminHomeState extends State<AdminHome> {
               },
             ),
             SizedBox(
-              height: 220,
+              height: 250.h,
             ),
             ListTile(
               leading: const Icon(Icons.logout),
@@ -188,38 +188,43 @@ class _AdminHomeState extends State<AdminHome> {
         ),
       ),
       body: tabs.elementAt(selectedIndex),
-      bottomNavigationBar: FlashyTabBar(
-        selectedIndex: selectedIndex,
-        backgroundColor: Colors.white, // Dark Green
-        iconSize: 30.sp,
-        animationCurve: Curves.easeInOut,
-        animationDuration: const Duration(milliseconds: 300),
-        onItemSelected: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
-        items: [
-          FlashyTabBarItem(
-            icon: const Icon(Icons.person_search),
-            title: const Text('Home'),
-            activeColor: Color(0xFF659F62),     // Light Green for active state
-            inactiveColor: Colors.black,             // White for inactive state
-          ),
-          FlashyTabBarItem(
-            icon: const Icon(Icons.data_exploration),
-            title: const Text('Data'),
-            activeColor: Color(0xFF659F62),
-            inactiveColor: Colors.black,
-          ),
-          FlashyTabBarItem(
+      bottomNavigationBar: Container(
+        height: 80.h ,
+        child: FlashyTabBar(
 
-            icon: const Icon(Icons.chat),
-            title: const Text('Chat'),
-            activeColor: Color(0xFF659F62),
-            inactiveColor: Colors.black,
-          ),
-        ],
+          selectedIndex: selectedIndex,
+          backgroundColor: Colors.white, // Dark Green
+          iconSize: 30.sp,
+          animationCurve: Curves.easeInOut,
+          animationDuration: const Duration(milliseconds: 300),
+          onItemSelected: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          items: [
+            FlashyTabBarItem(
+
+              icon: const Icon(Icons.person_search),
+              title: const Text('Home'),
+              activeColor: Color(0xFF659F62),     // Light Green for active state
+              inactiveColor: Colors.black,             // White for inactive state
+            ),
+            FlashyTabBarItem(
+              icon: const Icon(Icons.data_exploration),
+              title: const Text('Data'),
+              activeColor: Color(0xFF659F62),
+              inactiveColor: Colors.black,
+            ),
+            FlashyTabBarItem(
+
+              icon: const Icon(Icons.chat),
+              title: const Text('Chat'),
+              activeColor: Color(0xFF659F62),
+              inactiveColor: Colors.black,
+            ),
+          ],
+        ),
       ),
     );
   }

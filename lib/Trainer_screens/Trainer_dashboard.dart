@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TrainerDashboard extends StatefulWidget {
   @override
@@ -78,7 +79,7 @@ class _TrainerDashboardState extends State<TrainerDashboard> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 70.h,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

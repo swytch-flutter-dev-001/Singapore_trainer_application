@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';  // Import the SpinKit package
 
 class ReviewResponsePage extends StatefulWidget {
   final Map<String, dynamic> review;
@@ -12,12 +14,13 @@ class ReviewResponsePage extends StatefulWidget {
 
 class _ReviewResponsePageState extends State<ReviewResponsePage> {
   TextEditingController _responseController = TextEditingController();
+  bool isLoading = false;  // This will track the loading state
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 70.h,
         title: const Text(
           'RESPOND TO REVIEW',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.white),
@@ -102,9 +105,20 @@ class _ReviewResponsePageState extends State<ReviewResponsePage> {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: () {
-                  widget.onSubmitResponse(_responseController.text);
-                  Navigator.pop(context);
+                onPressed: isLoading ? null : () async {
+                  setState(() {
+                    isLoading = true;  // Show the loading spinner
+                  });
+
+                  // Simulate a network request or some action before submitting the response
+                  await Future.delayed(Duration(seconds: 2));  // Simulate a delay
+
+                  widget.onSubmitResponse(_responseController.text);  // Submit the response
+                  Navigator.pop(context);  // Go back to the previous screen
+
+                  setState(() {
+                    isLoading = false;  // Hide the loading spinner after submission
+                  });
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF659F62), // Dark Green
@@ -113,7 +127,9 @@ class _ReviewResponsePageState extends State<ReviewResponsePage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                child: const Text(
+                child: isLoading
+                    ? SpinKitFadingCube(color: Colors.white, size: 30.sp)  // Show spinner when loading
+                    : const Text(
                   'Submit Response',
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                 ),

@@ -91,17 +91,31 @@ class _ChatingTrainerState extends State<ChatingTrainer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Colors.white),
-        toolbarHeight: 80, // Responsive height
+        toolbarHeight: 70.h ,// Responsive height
         backgroundColor: primaryColor,
-        title: Text(
-          "Chat",
-          style: TextStyle(
-            fontWeight: FontWeight.w500,
-            color: Colors.white,
-            fontSize: 18.sp,
-            letterSpacing: 1.2,
-          ),
+        title: Row(
+
+          children: [
+
+            CircleAvatar(
+              radius: 30,
+              backgroundImage: AssetImage("assets/images/Singapore Trainers-2.png"),
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Text(
+              "CHAT",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+                fontSize: 18.sp,
+                letterSpacing: 1.2,
+              ),
+            ),
+          ],
         ),
         elevation: 5,
       ),

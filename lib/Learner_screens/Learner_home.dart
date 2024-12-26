@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:singapore_trainer_app/Trainer_screens/trainer_home.dart';
 import 'package:singapore_trainer_app/screens/admin_screens/admin_home.dart';
 import '../screens/Onboarding_screens/login_page.dart';
+import 'Learner_add_rating.dart';
 import 'Learner_calenders.dart';
 import 'Learner_class_details.dart';
 import 'Learner_profile.dart';
@@ -27,6 +28,7 @@ class _Learner_homeState extends State<Learner_home> {
   final List<Widget> tabs = [
     LearnerServicePage(),
     ChatingLearner(),
+    LearnerAddRating(),
     LernerCalendarPage(),
   ];
 
@@ -40,7 +42,7 @@ class _Learner_homeState extends State<Learner_home> {
           color: Colors.white,
         ),
         backgroundColor: const Color(0xFF659F62),
-        toolbarHeight: 80.h, // Use ScreenUtil for height
+        toolbarHeight: 70.h, // Use ScreenUtil for height
         title: Text(
           "LEARNER HOME",
           style: TextStyle(
@@ -130,7 +132,7 @@ class _Learner_homeState extends State<Learner_home> {
               },
             ),
             SizedBox(
-              height: 360,
+              height: 370.h,
             ),
             ListTile(
               leading: const Icon(Icons.logout),
@@ -225,6 +227,17 @@ class _Learner_homeState extends State<Learner_home> {
               'Chat',
               style: TextStyle(fontSize: 14.sp), // Use ScreenUtil for font size
             ),
+
+            activeColor: const Color(0xFF659F62),
+            inactiveColor: Colors.black,
+          ),
+          FlashyTabBarItem(
+            icon: const Icon(Icons.rate_review),
+            title: Text(
+              'Rating',
+              style: TextStyle(fontSize: 14.sp), // Use ScreenUtil for font size
+            ),
+
             activeColor: const Color(0xFF659F62),
             inactiveColor: Colors.black,
           ),

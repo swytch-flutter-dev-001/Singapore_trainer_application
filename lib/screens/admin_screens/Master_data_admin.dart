@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AdminMDMPage extends StatefulWidget {
   const AdminMDMPage({Key? key}) : super(key: key);
@@ -69,6 +70,9 @@ class _AdminMDMPageState extends State<AdminMDMPage> {
               ),
               const SizedBox(height: 10),
               _buildSearchBar(),
+              SizedBox(
+                height: 8.h,
+              ),
               _buildUserListView(
                 trainers.where((trainer) => trainer['name']!.toLowerCase().contains(searchQuery.toLowerCase())).toList(),
                 'Trainer',
@@ -83,9 +87,13 @@ class _AdminMDMPageState extends State<AdminMDMPage> {
                 'Learner',
               ),
             ],
+
           ),
+
         ),
+
       ),
+
     );
   }
 
@@ -167,19 +175,23 @@ class _AdminMDMPageState extends State<AdminMDMPage> {
 
   // Search bar widget
   Widget _buildSearchBar() {
-    return TextField(
-      decoration: InputDecoration(
-        labelText: 'Search by Name',
-        prefixIcon: Icon(Icons.search),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+    return Padding(
+      padding: const EdgeInsets.all(5.0),
+      child: TextField(
+        decoration: InputDecoration(
+          labelText: 'Search by Name',
+          prefixIcon: Icon(Icons.search),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+        ),
+        onChanged: (query) {
+          setState(() {
+            searchQuery = query;
+          });
+        },
       ),
-      onChanged: (query) {
-        setState(() {
-          searchQuery = query;
-        });
-      },
     );
   }
+
 
   // Function to build user list in cards
   Widget _buildUserListView(List<Map<String, String>> users, String role) {
@@ -190,14 +202,42 @@ class _AdminMDMPageState extends State<AdminMDMPage> {
       itemBuilder: (context, index) {
         final user = users[index];
         return Card(
-          color: Color(0xFFCDEAC0),
+          color: Color(0xFFF0F8F5),
           elevation: 3,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
           child: ListTile(
-            title: Text(user['name']!, style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF659F62))),
-            subtitle: Text(user['role']!, style: TextStyle(color: Colors.black)),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h), // Add padding for better spacing
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.center, // Align children vertically to the center
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage("assets/images/Singapore Trainers-2.png"),
+                  radius: 25.r, // Use responsive size
+                ),
+                SizedBox(width: 15.w), // Use responsive size for spacing
+                Expanded( // Ensure that text takes up remaining space
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start, // Align text to the left
+                      children: [
+                        Text(
+                          user['name']!,
+                          style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF659F62), fontSize: 16.sp), // Responsive font size
+                        ),
+                        SizedBox(height: 4.h), // Responsive vertical space between name and role
+                        Text(
+                          user['role']!,
+                          style: TextStyle(color: Colors.black, fontSize: 14.sp), // Responsive font size
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             trailing: Row(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisSize: MainAxisSize.min, // Avoid excessive space between trailing icons
               children: [
                 IconButton(
                   icon: const Icon(Icons.edit, color: Color(0xFF659F62)),
@@ -218,6 +258,7 @@ class _AdminMDMPageState extends State<AdminMDMPage> {
       },
     );
   }
+
 
   // Function to edit a user
   void _editUser(Map<String, String> user, String role) {
@@ -274,34 +315,88 @@ class EditUserPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        iconTheme: IconThemeData(
-          color: Colors.white
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
-        title: const Text('Edit User',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18),),
-        backgroundColor: Color(0xFF659F62),
+        title: const Text(
+          'EDIT USER',
+          style: TextStyle(fontWeight: FontWeight.w500, color: Colors.white, fontSize: 20),
+        ),
+        backgroundColor: const Color(0xFF659F62),
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
-              controller: nameController,
-              decoration: const InputDecoration(labelText: 'Name'),
-            ),
-            const SizedBox(height: 16),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF659F62),
-                foregroundColor: Colors.white,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Name Field
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 5,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: TextFormField(
+                      controller: nameController,
+                      decoration: const InputDecoration(
+                        labelText: 'Name',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 12.0),
+                      ),
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Save Changes Button
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF659F62), Color(0xFF4B8A3C)],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        user['name'] = nameController.text;
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'Save Changes',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              onPressed: () {
-                user['name'] = nameController.text;
-                Navigator.pop(context);
-              },
-              child: const Text('Save Changes'),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );

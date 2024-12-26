@@ -74,8 +74,8 @@ class _AdminProfileEditPageState extends State<AdminProfileEditPage> {
                             ),
                             const SizedBox(height: 10),
                             const Text(
-                              "Name",
-                              style: TextStyle(fontSize: 12, color: Colors.black),
+                              "TYSON",
+                              style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600, color: Colors.black),
                             ),
                           ],
                         ),
@@ -84,14 +84,14 @@ class _AdminProfileEditPageState extends State<AdminProfileEditPage> {
 
                       // Editable Fields
                       _buildEditableField("Name", _nameController, "Enter your name"),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 20),
                       _buildEditableField("Company Name", _companyController, "Enter your company name"),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 20),
                       _buildEditableField("Expertise", _expertiseController, "Enter your expertise"),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 20),
                       _buildEditableField("Phone Number", _phoneController, "Enter your phone number",
                           keyboardType: TextInputType.phone),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 30),
 
                       // Save Changes Button
                       SizedBox(
@@ -99,7 +99,9 @@ class _AdminProfileEditPageState extends State<AdminProfileEditPage> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
+
                             if (_formKey.currentState!.validate()) {
+                              Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text("Profile updated successfully!")),
                               );
@@ -117,6 +119,7 @@ class _AdminProfileEditPageState extends State<AdminProfileEditPage> {
                           ),
                         ),
                       ),
+
                     ],
                   ),
                 ),

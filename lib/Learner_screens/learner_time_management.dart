@@ -45,7 +45,7 @@ class _TimeManagementPageState extends State<TimeManagementPage> {
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
-        toolbarHeight: 80.h,
+        toolbarHeight: 70.h,
         title: Text(
           'TIME MANAGEMENT',
           style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500, color: Colors.white),

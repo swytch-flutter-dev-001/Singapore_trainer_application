@@ -73,7 +73,7 @@ class _BatchManagementPageState extends State<BatchManagementPage> {
       ),
       backgroundColor: Colors.white,
       appBar: AppBar(
-        toolbarHeight: 80.h,
+        toolbarHeight: 70.h,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF659F62),
         title: Text(
@@ -178,7 +178,7 @@ class _AddBatchPageState extends State<AddBatchPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 70.h,
         iconTheme: IconThemeData(color: Colors.white),
         title: Text(
           'CREATE NEW BATCH',

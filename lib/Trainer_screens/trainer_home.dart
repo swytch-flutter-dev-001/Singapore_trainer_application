@@ -7,6 +7,7 @@ import 'package:singapore_trainer_app/Trainer_screens/trainer_chat.dart';
 import 'package:singapore_trainer_app/Trainer_screens/trainer_reviews.dart';
 import 'package:singapore_trainer_app/Trainer_screens/Trainer_dashboard.dart';
 import 'package:singapore_trainer_app/Trainer_screens/Trainer_profile.dart';
+import '../screens/Onboarding_screens/login_page.dart';
 import 'Notification_trainer.dart';
 import 'Trainer_screening.dart';
 import 'batch_management.dart';
@@ -44,7 +45,7 @@ class _Trainer_homeState extends State<Trainer_home> {
           color: Colors.white,
         ),
         backgroundColor: const Color(0xFF659F62),
-        toolbarHeight: 80.h, // Responsive height
+        toolbarHeight: 70.h, // Responsive height
         title: Text(
           "TRAINER HOME",
           style: TextStyle(
@@ -154,12 +155,16 @@ class _Trainer_homeState extends State<Trainer_home> {
               },
             ),
             SizedBox(
-              height: 230.h, // Responsive height
+              height: 290.h, // Responsive height
             ),
             ListTile(
               leading: const Icon(Icons.logout),
               title: const Text("Logout"),
               onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()), // Replace with your login page widget
+                );
                 // Logout action can be added here
               },
             ),

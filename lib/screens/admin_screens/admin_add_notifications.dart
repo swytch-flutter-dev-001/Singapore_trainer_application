@@ -65,7 +65,7 @@ class _AdminAddNotificationState extends State<AdminAddNotification> {
               decoration: InputDecoration(
                 hintText: "Notification title",
                 filled: true,
-                fillColor: const Color(0xFFCDEAC0), // Light Green
+                fillColor: const Color(0xFFF0F8F5), // Light Green
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: Color(0xFF92C287)), // Medium Green border
@@ -90,7 +90,7 @@ class _AdminAddNotificationState extends State<AdminAddNotification> {
               decoration: InputDecoration(
                 hintText: "Notification content",
                 filled: true,
-                fillColor: const Color(0xFFCDEAC0), // Light Green
+                fillColor: const Color(0xFFF0F8F5), // Light Green
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: const BorderSide(color: Color(0xFF92C287)), // Medium Green border

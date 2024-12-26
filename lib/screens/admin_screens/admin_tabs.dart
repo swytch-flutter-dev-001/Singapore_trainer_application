@@ -105,8 +105,8 @@ class ManageLearnersTab extends StatelessWidget {
             },
             child: ListTile(
               leading: const CircleAvatar(
-                backgroundColor: Color(0xFF92C287),
-                child: Icon(Icons.person, color: Colors.white),
+                backgroundImage: AssetImage("assets/images/Singapore Trainers-2.png"),
+               radius: 30,
               ),
               title: Text(
                 "Arnold ${index + 1}",
@@ -170,8 +170,8 @@ class ManageTrainersTab extends StatelessWidget {
             },
             child: ListTile(
               leading: const CircleAvatar(
-                backgroundColor: Color(0xFF92C287),
-                child: Icon(Icons.person, color: Colors.white),
+                radius: 35,
+                backgroundImage: AssetImage("assets/images/Singapore Trainers-2.png"),
               ),
               title: Text(
                 "Trainer ${index + 1}",

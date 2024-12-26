@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';  // Import the Spinkit package
 
 class EditBatch extends StatefulWidget {
   final Map<String, dynamic> batchDetails;
@@ -15,6 +16,7 @@ class _EditBatchState extends State<EditBatch> {
   late TextEditingController daysCtrl;
   late TextEditingController timeSlotCtrl;
   late TextEditingController maxCapacityCtrl;
+  bool _isLoading = false;  // This will track loading state
 
   @override
   void initState() {
@@ -35,7 +37,16 @@ class _EditBatchState extends State<EditBatch> {
     super.dispose();
   }
 
-  void updateBatch() {
+  // Simulating a network call for updating the batch
+  Future<void> updateBatch() async {
+    setState(() {
+      _isLoading = true;  // Show the loading spinner
+    });
+
+    // Simulating a delay (like an API call)
+    await Future.delayed(Duration(seconds: 2));
+
+    // After the update completes, create the updated batch
     Map<String, dynamic> updatedBatch = {
       'batchName': nameCtrl.text,
       'days': daysCtrl.text,
@@ -44,7 +55,12 @@ class _EditBatchState extends State<EditBatch> {
       'enrolledLearners': widget.batchDetails['enrolledLearners'], // Preserve enrolled learners
     };
 
+    // Pop the updated batch back to the previous screen
     Navigator.pop(context, updatedBatch);
+
+    setState(() {
+      _isLoading = false;  // Hide the loading spinner
+    });
   }
 
   // Reusable method to build input fields
@@ -80,71 +96,80 @@ class _EditBatchState extends State<EditBatch> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80.h,
+        toolbarHeight: 70.h,
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF659F62), // Dark Green
         title: Text(
-          'Edit ${widget.batchDetails['batchName']}',
+          ('Edit ${widget.batchDetails['batchName']}').toUpperCase(),
           style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500, color: Colors.white),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(20.w),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 10.h),
+      body: _isLoading
+          ? Center(
+        child: SpinKitFadingCube(
+          color: Color(0xFF659F62), // Dark Green
+          size: 50.0,
+        ),
+      )
+          :
+         Padding(
+          padding: EdgeInsets.all(20.w),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 10.h),
 
-              // Batch Name Field
-              Text("Batch Name", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-              SizedBox(height: 10.h),
-              _buildInputField("Batch Name", nameCtrl),
-              SizedBox(height: 10.h),
+                // Batch Name Field
+                Text("Batch Name", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                SizedBox(height: 10.h),
+                _buildInputField("Batch Name", nameCtrl),
+                SizedBox(height: 10.h),
 
-              // Days Field
-              Text("Days", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-              SizedBox(height: 10.h),
-              _buildInputField("Days", daysCtrl),
-              SizedBox(height: 10.h),
+                // Days Field
+                Text("Days", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                SizedBox(height: 10.h),
+                _buildInputField("Days", daysCtrl),
+                SizedBox(height: 10.h),
 
-              // Time Slot Field
-              Text("Time Slot", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-              SizedBox(height: 10.h),
-              _buildInputField("Time Slot", timeSlotCtrl),
-              SizedBox(height: 10.h),
+                // Time Slot Field
+                Text("Time Slot", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                SizedBox(height: 10.h),
+                _buildInputField("Time Slot", timeSlotCtrl),
+                SizedBox(height: 10.h),
 
-              // Max Capacity Field
-              Text("Max Capacity", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
-              SizedBox(height: 10.h),
-              _buildInputField("Max Capacity", maxCapacityCtrl, inputType: TextInputType.number),
-              SizedBox(height: 30.h),
+                // Max Capacity Field
+                Text("Max Capacity", style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold)),
+                SizedBox(height: 10.h),
+                _buildInputField("Max Capacity", maxCapacityCtrl, inputType: TextInputType.number),
+                SizedBox(height: 30.h),
 
-              // Update Button
-              Center(
-                child: SizedBox(
-                  height: 50.h,
-                  width: 315.w,
-                  child: ElevatedButton(
-                    onPressed: updateBatch,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF659F62),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
+                // Update Button
+                Center(
+                  child: SizedBox(
+                    height: 50.h,
+                    width: 315.w,
+                    child: ElevatedButton(
+                      onPressed: updateBatch, // Disable button while loading
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF659F62),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 10.h),
                       ),
-                      padding: EdgeInsets.symmetric(horizontal: 50.w, vertical: 10.h),
-                    ),
-                    child: Text(
-                      "Update",
-                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                      child: Text(
+                        "Update",
+                        style: TextStyle(color: Colors.white, fontSize: 18.sp),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+
   }
 }

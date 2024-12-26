@@ -10,11 +10,12 @@ class BatchDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 70.h ,
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
-        title: Text(batchDetails['batchName'] ?? 'No Batch Name',style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.white),),
+        title: Text((batchDetails['batchName'] ?? 'No Batch Name').toUpperCase(),
+            style: TextStyle(fontWeight: FontWeight.w500,fontSize: 18,color: Colors.white)),
         backgroundColor: Color(0xFF659F62), // Dark Green
       ),
       body: Padding(

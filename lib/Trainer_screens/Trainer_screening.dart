@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../utils/screening.dart';
 
 class ScreeningTimePage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _ScreeningTimePageState extends State<ScreeningTimePage> {
 
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 80,
+        toolbarHeight: 70.h,
         iconTheme: IconThemeData(
           color: Colors.white,
         ),

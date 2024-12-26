@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:singapore_trainer_app/Trainer_screens/trainer_response_page.dart';
 
@@ -45,7 +46,7 @@ class _TrainerReviewsState extends State<TrainerReviews> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        toolbarHeight: 80,
+        toolbarHeight: 70.h,
         backgroundColor: const Color(0xFF659F62),
         title: const Text(
           "REVIEWS",

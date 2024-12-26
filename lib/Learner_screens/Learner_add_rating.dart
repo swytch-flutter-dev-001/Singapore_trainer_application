@@ -17,22 +17,27 @@ class _LearnerAddRatingState extends State<LearnerAddRating> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Color(0xFFF0F8F5),
       appBar: AppBar(
-        toolbarHeight: 90,
+        toolbarHeight: 80,
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
         backgroundColor: Color(0xFF659F62), // Dark Green
         title: const Text(
-          "Rating and Reviews",
+          "RATING AND REVIEWS",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
             color: Colors.white,
           ),
         ),
-        centerTitle: true,
+
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
         child: Card(
+          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
