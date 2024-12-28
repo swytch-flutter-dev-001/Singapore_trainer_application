@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:singapore_trainer_app/Trainer_screens/trainer_signup.dart';
+import 'package:singapore_trainer_app/screens/Onboarding_screens/register_page.dart';
 
 import '../../Learner_screens/Learner_signup.dart';
 
@@ -79,10 +80,9 @@ class FieldPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const TrainerSignIn(),
+                                builder: (context) => RegistrationPage(role: "trainer"),
                               ),
                             );
-
                             print("Trainer role selected");
                           },
                           height: 45.h,
@@ -113,10 +113,9 @@ class FieldPage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const LearnerSignIn(),
+                                builder: (context) => RegistrationPage(role: "learner"),
                               ),
                             );
-
                             print("Learner role selected");
                           },
                           height: 45.h,
@@ -137,31 +136,6 @@ class FieldPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 20.h),
-
-                      // Admin Login Button with Animation
-                      // FadeInUp(
-                      //   duration: const Duration(milliseconds: 1800),
-                      //   child: MaterialButton(
-                      //     onPressed: () {
-                      //       print("Admin role selected");
-                      //     },
-                      //     height: 50.h,
-                      //     color: Colors.red.shade400,
-                      //     shape: RoundedRectangleBorder(
-                      //       borderRadius: BorderRadius.circular(50.r),
-                      //     ),
-                      //     child: Center(
-                      //       child: Text(
-                      //         "Admin Login",
-                      //         style: TextStyle(
-                      //           color: Colors.white,
-                      //           fontWeight: FontWeight.bold,
-                      //           fontSize: 16.sp,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

@@ -1,29 +1,81 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:animate_do/animate_do.dart';
+import '../../services/api_service.dart'; // Ensure this import is correct for your API service
 import 'identity_register.dart';
 import 'login_page.dart';
 
 class RegistrationPage extends StatefulWidget {
+  final String role;
+
+  // Constructor to accept role
+  RegistrationPage({required this.role});
+
   @override
   State<RegistrationPage> createState() => _RegistrationPageState();
 }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  String passwords = '';
-  bool showpassword = false;
+  bool showPassword = false; // Toggle password visibility
 
-  void tooglepassword() {
+  // Form validation and state management
+  final _formKey = GlobalKey<FormState>();
+  String? _fullName, _username, _email, _phoneNumber, _password, _confirmPassword;
+  bool _isLoading = false;
+
+  // Toggle password visibility
+  void togglePassword() {
     setState(() {
-      showpassword = !showpassword;
+      showPassword = !showPassword;
     });
   }
 
-  final _formKey = GlobalKey<FormState>();
+  // Register function
+  Future<void> _register() async {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
 
-  String? _fullName, _username, _email, _phoneNumber, _password,
-      _confirmPassword;
+      setState(() {
+        _isLoading = true;
+      });
+
+      // Ensure passwords match
+      if (_password != _confirmPassword) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Passwords do not match')),
+        );
+        setState(() {
+          _isLoading = false;
+        });
+        return;
+      }
+
+      // Call the registerUser function from API service
+      try {
+        await registerUser(
+          fullName: _fullName!,
+          username: _username!,
+          email: _email!,
+          phoneNumber: _phoneNumber!,
+          password: _password!,
+          role: widget.role,
+          showMessage: (message) {
+            // Handle showing the message (SnackBar, Dialog)
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+          },
+        );
+      } catch (error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Registration failed: $error')),
+        );
+      } finally {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +87,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             colors: [
-              Color(0xFF659F62), // Dark Green
-              Color(0xFF659F62), // Medium Green
-              Color(0xFF659F62), // Light Green
+              Color(0xFF659F62),
+              Color(0xFF659F62),
+              Color(0xFF659F62),
             ],
           ),
         ),
@@ -46,7 +98,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               SizedBox(height: 40.h),
-
               // Logo
               Padding(
                 padding: EdgeInsets.all(20),
@@ -56,9 +107,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   child: Image.asset("assets/images/Singapore Trainers-2.png"),
                 ),
               ),
-
               SizedBox(height: 20.h),
-
               // Registration Form
               Container(
                 decoration: BoxDecoration(
@@ -75,7 +124,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     child: Column(
                       children: <Widget>[
                         Text(
-                          "Register Now",
+                          "REGISTER AS ${widget.role.toUpperCase()}",
                           style: TextStyle(
                             fontSize: 20.sp,
                             fontWeight: FontWeight.w600,
@@ -83,58 +132,34 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                         ),
                         SizedBox(height: 20.h),
-
                         // Full Name Input
-                        _buildInputField(
-                            "Full Name", (value) => _fullName = value),
-
+                        _buildInputField("Full Name", (value) => _fullName = value),
                         // Username Input
-                        _buildInputField(
-                            "Username", (value) => _username = value),
-
+                        _buildInputField("Username", (value) => _username = value),
                         // Email Input
-                        _buildInputField("Email", (value) => _email = value,
-                            inputType: TextInputType.emailAddress),
-
+                        _buildInputField("Email", (value) => _email = value, inputType: TextInputType.emailAddress),
                         // Phone Number Input
-                        _buildInputField(
-                            "Phone Number", (value) => _phoneNumber = value,
-                            inputType: TextInputType.phone),
-
+                        _buildInputField("Phone Number", (value) => _phoneNumber = value, inputType: TextInputType.phone),
                         // Password Input
-                        _buildPasswordField(
-                            "Password", (value) => _password = value),
-
+                        _buildPasswordField("Password", (value) => _password = value),
                         // Confirm Password Input
-                        _buildPasswordField("Confirm Password", (value) =>
-                        _confirmPassword = value),
-
+                        _buildPasswordField("Confirm Password", (value) => _confirmPassword = value),
                         SizedBox(height: 30.h),
-
                         // Register Button
                         FadeInUp(
                           duration: Duration(milliseconds: 1600),
-                          child: MaterialButton(
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                _formKey.currentState!.save();
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => IdentityRegistration()),
-                                );
-                                print(
-                                    "Registered as $_fullName, $_username, $_email");
-                              }
-                            },
-                            height: 40.h,
+                          child: _isLoading
+                              ? CircularProgressIndicator()
+                              : MaterialButton(
+                            onPressed: _register,
+                            height: 50.h,
                             color: Color(0xFF659F62),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             child: Center(
                               child: Text(
-                                "REGISTER",
+                                ("REGISTER AS ${widget.role}").toUpperCase(),
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
@@ -144,9 +169,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             ),
                           ),
                         ),
-
                         SizedBox(height: 20.h),
-
                         // Login Link
                         FadeInUp(
                           duration: Duration(milliseconds: 1700),
@@ -154,8 +177,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             onPressed: () {
                               Navigator.pushReplacement(
                                 context,
-                                MaterialPageRoute(
-                                    builder: (context) => LoginPage()),
+                                MaterialPageRoute(builder: (context) => LoginPage()),
                               );
                             },
                             child: Text(
@@ -180,7 +202,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  // Helper method to build a text input field with low-opacity border
+  // Helper method to build a text input field
   Widget _buildInputField(String hintText, Function(String?) onSaved,
       {TextInputType inputType = TextInputType.text}) {
     return FadeInUp(
@@ -207,26 +229,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.r),
               borderSide: BorderSide(
-                color: Color(0x50659F62), // Border with low opacity
+                color: Color(0x50659F62),
                 width: 1.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.r),
               borderSide: BorderSide(
-                color: Color(0x50659F62), // Border with low opacity
+                color: Color(0x50659F62),
                 width: 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.r),
               borderSide: BorderSide(
-                color: Color(0xFF659F62), // Solid border when focused
+                color: Color(0xFF659F62),
                 width: 1.5,
               ),
             ),
-            contentPadding: EdgeInsets.symmetric(
-                vertical: 12.h, horizontal: 16.w),
+            contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
           ),
           onSaved: onSaved,
           validator: (value) => value!.isEmpty ? 'Enter your $hintText' : null,
@@ -235,8 +256,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-
-  // Helper method to build a password input field with low-opacity border
+  // Helper method to build password input field
   Widget _buildPasswordField(String hintText, Function(String?) onSaved) {
     return FadeInUp(
       duration: Duration(milliseconds: 1400),
@@ -255,41 +275,37 @@ class _RegistrationPageState extends State<RegistrationPage> {
           ],
         ),
         child: TextFormField(
-          obscureText: !showpassword,
+          obscureText: !showPassword, // Toggle password visibility
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(color: Colors.grey),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.r),
               borderSide: BorderSide(
-                color: Color(0x50659F62), // Border with low opacity
+                color: Color(0x50659F62),
                 width: 1.0,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.r),
               borderSide: BorderSide(
-                color: Color(0x50659F62), // Border with low opacity
+                color: Color(0x50659F62),
                 width: 1.0,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(11.r),
               borderSide: BorderSide(
-                color: Color(0xFF659F62), // Solid border when focused
+                color: Color(0xFF659F62),
                 width: 1.5,
               ),
             ),
-            contentPadding: EdgeInsets.symmetric(
-                vertical: 12.h, horizontal: 16.w),
-            suffixIcon: Padding(
-              padding: EdgeInsets.only(right: 12.w),
-              child: IconButton(
-                onPressed: tooglepassword,
-                icon: Icon(
-                  showpassword ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
-                  size: 16,
-                ),
+            contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+            suffixIcon: IconButton(
+              onPressed: togglePassword,
+              icon: Icon(
+                size: 16,
+                showPassword ? CupertinoIcons.eye : CupertinoIcons.eye_slash,
               ),
             ),
           ),

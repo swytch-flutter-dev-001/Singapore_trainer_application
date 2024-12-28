@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
 
     // Delay of 3 seconds before navigating to the next screen
-    Future.delayed(Duration(seconds: 10), () {
+    Future.delayed(Duration(seconds: 6), () {
       // Navigating to the next screen (replace '/pageview' with your route name)
       Navigator.pushReplacementNamed(context, '/pageview');
     });
