@@ -65,6 +65,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
           },
         );
+
       } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Registration failed: $error')),
@@ -76,6 +77,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       }
     }
   }
+
 
   @override
   Widget build(BuildContext context) {

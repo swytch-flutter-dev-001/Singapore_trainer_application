@@ -9,6 +9,7 @@ import 'package:singapore_trainer_app/screens/admin_screens/admin_login.dart';
 import '../../authentications/forgot_pass.dart';
 import '../../Learner_screens/learner_home.dart';
 import '../../Trainer_screens/trainer_home.dart';
+import '../../services/loginusers.dart';
 import '../admin_screens/admin_home.dart';
 import 'field_page.dart';
 import 'identity_register.dart';
@@ -32,33 +33,57 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void _login() {
+  void _login() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
-      // Example role-based authentication logic
-      if (_email == 'admin@gmail.com' && _password == '123') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => AdminHome()),
-        );
-      } else if (_email == 'trainer@gmail.com' && _password == '123') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Trainer_home()),
-        );
-      } else if (_email == 'learner@gmail.com' && _password == '123') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => Learner_home()),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Invalid credentials. Please try again.'),
-          ),
-        );
-      }
+      setState(() {
+        _isLoading = true;
+      });
+
+      await loginUser(
+        usernameOrEmail: _email!,
+        password: _password!,
+        showMessage: (message) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(message)),
+          );
+        },
+        onLoginSuccess: (token) async {
+          try {
+            String role = await fetchUserRole(token);
+
+            if (role == "admin") {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => AdminHome()),
+              );
+            } else if (role == "trainer") {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Trainer_home()),
+              );
+            } else if (role == "learner") {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Learner_home()),
+              );
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("Unknown role: $role")),
+              );
+            }
+          } catch (error) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text("Error: $error")),
+            );
+          }
+        },
+      );
+
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 

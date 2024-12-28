@@ -1,45 +1,60 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../utils/models.dart';
+const String apiBaseUrl = "https://singapore-trainers.bellpepper.site"; // Replace with actual API base URL
 
-Future<LoginResponse?> loginUser(String email, String password, BuildContext context) async {
-  final Uri url = Uri.parse('https://singapore-trainers.bellpepper.site/v1/user/login'); // Replace with your API endpoint
+// Login API endpoint
+final String loginApi = "$apiBaseUrl/v1/user/login"; //endpoints of login
 
+// Function to login user
+Future<void> loginUser({
+  required String usernameOrEmail,
+  required String password,
+  required Function(String) showMessage,
+  required Function(String) onLoginSuccess,
+}) async {
   try {
+    Map<String, dynamic> requestBody = {
+      'usernameOrEmail': usernameOrEmail,
+      'password': password,
+    };
+
     final response = await http.post(
-      url,
+      Uri.parse(loginApi),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'email': email,
-        'password': password,
-      }),
+      body: json.encode(requestBody),
     );
 
     if (response.statusCode == 200) {
-      final Map<String, dynamic> responseData = json.decode(response.body);
-
-      // Save JWT tokens in shared preferences
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('accessToken', responseData['data']['accessToken']);
-      prefs.setString('refreshToken', responseData['data']['refreshToken']);
-
-      // Optionally save user info
-      prefs.setInt('userId', responseData['data']['user']['id']);
-      prefs.setString('username', responseData['data']['user']['username']);
-      prefs.setString('role', responseData['data']['user']['role']);
-
-      // Return login response
-      return LoginResponse.fromJson(responseData['data']);
+      Map<String, dynamic> responseData = json.decode(response.body);
+      String token = responseData['token']; // Adjust based on your backend's response
+      showMessage("Login successful!");
+      onLoginSuccess(token);
     } else {
-      final Map<String, dynamic> errorData = json.decode(response.body);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorData['message'])));
-      return null;
+      Map<String, dynamic> errorData = json.decode(response.body);
+      showMessage("Login failed: ${errorData['message'] ?? "Invalid credentials"}");
     }
   } catch (error) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Something went wrong.')));
-    return null;
+    showMessage("Error: $error");
+  }
+}
+
+// Fetch user role API endpoint
+final String userRoleApi = "$apiBaseUrl/v1/user/role";
+
+Future<String> fetchUserRole(String token) async {
+  final response = await http.get(
+    Uri.parse(userRoleApi),
+    headers: {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    },
+  );
+
+  if (response.statusCode == 200) {
+    Map<String, dynamic> responseData = json.decode(response.body);
+    return responseData['role']; // Adjust based on API response
+  } else {
+    throw Exception("Failed to fetch role");
   }
 }
