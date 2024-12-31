@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-var apiBaseUrl = "https://singapore-trainers.bellpepper.site"; // Backend URL
+import '../api_keys/const_api.dart';
+
 var regApi = "$apiBaseUrl/v1/user/register"; // Registration API endpoint
 
 // A method to register a user with the provided details
@@ -9,7 +10,8 @@ Future<void> registerUser({
   required String fullName,
   required String username,
   required String email,
-  required String phoneNumber,
+  required String phone,
+  required String ccode, // Expecting phone to already include the country code
   required String password,
   required String role,
   required Function(String) showMessage, // Show message callback
@@ -20,7 +22,8 @@ Future<void> registerUser({
       'fullName': fullName,
       'username': username,
       'email': email,
-      'phone': phoneNumber,
+      'phone': phone,
+      'ccode': ccode, // Send full phone number (country code + phone)
       'password': password,
       'role': role, // Include role in the payload
     };
@@ -48,7 +51,7 @@ Future<void> registerUser({
       Map<String, dynamic> responseData = json.decode(response.body);
       showMessage("Registration successful: ${responseData['message']}");
     } else {
-      // Something went wrong
+      // Something went wrong, handle error message from API
       Map<String, dynamic> errorData = json.decode(response.body);
       showMessage("Error: ${errorData['message'] ?? "Registration failed!"}");
     }

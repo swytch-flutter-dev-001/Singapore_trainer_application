@@ -7,7 +7,7 @@ import 'package:singapore_trainer_app/Trainer_screens/trainer_chat.dart';
 import 'package:singapore_trainer_app/Trainer_screens/trainer_reviews.dart';
 import 'package:singapore_trainer_app/Trainer_screens/Trainer_dashboard.dart';
 import 'package:singapore_trainer_app/Trainer_screens/Trainer_profile.dart';
-import '../screens/Onboarding_screens/login_page.dart';
+import '../Views/login_view.dart';
 import 'Notification_trainer.dart';
 import 'Trainer_screening.dart';
 import 'batch_management.dart';

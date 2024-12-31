@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:singapore_trainer_app/screens/Onboarding_screens/login_page.dart';
+
+import '../../Views/login_view.dart';
 
 class SportsPageView extends StatefulWidget {
   @override

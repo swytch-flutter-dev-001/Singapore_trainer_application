@@ -6,10 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../Trainer_screens/Notification_trainer.dart';
 
+import '../../Views/login_view.dart';
 import '../../utils/TrainerInsightPage.dart';
 import '../../utils/action_page.dart';
 import '../../utils/reports_page.dart';
-import '../Onboarding_screens/login_page.dart';
 import 'Master_data_admin.dart';
 import 'admin_add_notifications.dart';
 import 'admin_chat.dart';
