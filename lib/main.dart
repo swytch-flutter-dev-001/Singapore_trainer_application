@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:singapore_trainer_app/screens/Onboarding_screens/splash_screen.dart';
 import 'package:singapore_trainer_app/screens/admin_screens/admin_login.dart';
 import 'package:singapore_trainer_app/screens/Onboarding_screens/field_page.dart';
-import 'package:singapore_trainer_app/screens/Onboarding_screens/register_page.dart';
 import 'package:singapore_trainer_app/screens/Onboarding_screens/pageview.dart';
 
 

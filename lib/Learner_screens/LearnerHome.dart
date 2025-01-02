@@ -2,8 +2,8 @@ import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:singapore_trainer_app/Trainer_screens/trainer_home.dart';
-import 'package:singapore_trainer_app/screens/admin_screens/admin_home.dart';
+import 'package:singapore_trainer_app/Trainer_screens/TrainerHome.dart';
+import 'package:singapore_trainer_app/screens/admin_screens/AdminHome.dart';
 import '../Views/login_view.dart';
 import 'Learner_add_rating.dart';
 import 'Learner_calenders.dart';
@@ -14,14 +14,14 @@ import 'learner_chating.dart';
 import 'learner_time_management.dart';
 import 'leraner_dashboard.dart';
 
-class Learner_home extends StatefulWidget {
-  const Learner_home({super.key});
+class LearnerHome extends StatefulWidget {
+  const LearnerHome({super.key});
 
   @override
-  State<Learner_home> createState() => _Learner_homeState();
+  State<LearnerHome> createState() => _LearnerHomeState();
 }
 
-class _Learner_homeState extends State<Learner_home> {
+class _LearnerHomeState extends State<LearnerHome> {
   int selectedIndex = 0;
   final PageController _pageController = PageController();
 

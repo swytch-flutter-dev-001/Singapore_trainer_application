@@ -2,9 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:singapore_trainer_app/Trainer_screens/trainer_signup.dart';
-import 'package:singapore_trainer_app/screens/Onboarding_screens/register_page.dart';
 
 import '../../Learner_screens/Learner_signup.dart';
+import '../../Views/RegistrationViewModels.dart';
 
 class FieldPage extends StatelessWidget {
   const FieldPage({super.key});

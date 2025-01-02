@@ -14,14 +14,14 @@ import 'batch_management.dart';
 import 'trainer_plans_subcriptions.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Trainer_home extends StatefulWidget {
-  const Trainer_home({super.key});
+class TrainerHome extends StatefulWidget {
+  const TrainerHome({super.key});
 
   @override
-  State<Trainer_home> createState() => _Trainer_homeState();
+  State<TrainerHome> createState() => _TrainerHomeState();
 }
 
-class _Trainer_homeState extends State<Trainer_home> {
+class _TrainerHomeState extends State<TrainerHome> {
   int selectedIndex = 0;
   final PageController _pageController = PageController();
 

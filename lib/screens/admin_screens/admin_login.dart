@@ -2,9 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:singapore_trainer_app/screens/admin_screens/admin_home.dart';
+import 'package:singapore_trainer_app/screens/admin_screens/AdminHome.dart';
 
 import '../../authentications/forgot_pass.dart';
+import 'AdminViews/AdminUiViews.dart';
 
 class AdminLoginPage extends StatefulWidget {
   @override
